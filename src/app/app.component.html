@@ -1,0 +1,38 @@
+<div class="row m-2">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Select Location...</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="locations">
+            <mat-option *ngFor="let location of locations" [value]="location">
+              {{location}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <button mat-raised-button color="primary" (click)="getWeatherReport()">Get Weather</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <table mat-table *ngIf="dataSource?.length" class="mat-elevation-z8 table-sm" [dataSource]="data">
+      <ng-container matColumnDef="cityName">
+        <th mat-header-cell *matHeaderCellDef> CITY NAME </th>
+        <td mat-cell *matCellDef="let element"> {{element.cityName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="weatherDesc">
+        <th mat-header-cell *matHeaderCellDef> WEATHER DESCRIPTION </th>
+        <td mat-cell *matCellDef="let element"> {{element.weatherDesc}} </td>
+      </ng-container>
+      <ng-container matColumnDef="temperature">
+        <th mat-header-cell *matHeaderCellDef> TEMPERATURE </th>
+        <td mat-cell *matCellDef="let element"> {{element.temperature | celsius}}&#176;C </td>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </table>
+  </div>
+</div>
